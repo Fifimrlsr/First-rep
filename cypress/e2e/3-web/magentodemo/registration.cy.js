@@ -1,6 +1,8 @@
 describe('Registration', () => {
-  it('Success Create Account', () => {
+  beforeEach(() => {
     cy.visit('https://magento.softwaretestingboard.com/customer/account/create/')
+  })
+  it('Success Create Account', () => {
     cy.get('#firstname').type('rafidah')
     cy.get('#lastname').type('marlasari')
     cy.get('#email_address').type('rafidahmarlasari@gmail.com')
@@ -10,19 +12,7 @@ describe('Registration', () => {
     cy.url().should('contain','https://magento.softwaretestingboard.com/customer/account/')
   })
 
-  //it('Failed Create Account - Empty First Name', () => {
-    //cy.visit('https://magento.softwaretestingboard.com/customer/account/create/')
-    //cy.get('#firstname').type('rafidah')
-    //cy.get('#lastname').type('marlasari')
-    //cy.get('#email_address').type('rafidahmarlasari@gmail.com')
-    //cy.get('#password').type('Password123')
-    //cy.get('#password-confirmation').type('Password123')
-    //cy.get('#form-validate').click()
-    //cy.url().should('contain','https://magento.softwaretestingboard.com/customer/account/')
-  })
-
   it('Failed Create Account - Invalid email', () => {
-    cy.visit('https://magento.softwaretestingboard.com/customer/account/create/')
     cy.get('#firstname').type('rafidah')
     cy.get('#lastname').type('marlasari')
     cy.get('#email_address').type('rafidahmarlasarigmail.com')
@@ -33,7 +23,6 @@ describe('Registration', () => {
   })
 
   it('Failed Create Account - invalid password (<8 symbols)', () => {
-    cy.visit('https://magento.softwaretestingboard.com/customer/account/create/')
     cy.get('#firstname').type('rafidah')
     cy.get('#lastname').type('marlasari')
     cy.get('#email_address').type('rafidahmarlasari@gmail.com')
@@ -44,7 +33,6 @@ describe('Registration', () => {
   })
 
   it('Failed Create Account - invalid password (>8 symbols)', () => {
-    cy.visit('https://magento.softwaretestingboard.com/customer/account/create/')
     cy.get('#firstname').type('rafidah')
     cy.get('#lastname').type('marlasari')
     cy.get('#email_address').type('rafidahmarlasari@gmail.com')
@@ -54,8 +42,7 @@ describe('Registration', () => {
     cy.get('#form-validate > .actions-toolbar > div.primary > .action > span').click()
   })
 
-  it.only('Failed Create Account - Wrong confirm password', () => {
-    cy.visit('https://magento.softwaretestingboard.com/customer/account/create/')
+  it('Failed Create Account - Wrong confirm password', () => {
     cy.get('#firstname').type('rafidah')
     cy.get('#lastname').type('marlasari')
     cy.get('#email_address').type('rafidahmarlasarigmail.com')
@@ -64,3 +51,4 @@ describe('Registration', () => {
     cy.get('#form-validate > .actions-toolbar > div.primary > .action > span').click()
     cy.get('#password-confirmation-error').should('contain.text','Please enter the same value again.')
   })
+})
